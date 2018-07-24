@@ -1,0 +1,366 @@
+//找到那个 app.js目录 
+cd /data/uploadPhoto
+//使用这个命令
+pm2 start app.js
+pm2 restart app.js
+
+server\server\lwstar\LWStarProcessor.cpp
+#define MAX_STRANGER    100
+
+//查看内网ip
+ip a
+
+服务器数据异常断点时：
+E:\project_p1\server_p1\server\logic\MainManager.cpp
+MainManager::Init()
+
+server\datastructure\datainfor\ConfigManager.cpp
+bool ConfigManager::InitAllData(const std::string &strPath)
+
+D:\Project\LoveDance_P1\server\server\logic\LogicCirculator.cpp
+bool CLogicCirculator::Initialize()
+
+
+//2区
+mysql -unsytdbuser -pnsytdbpassword -h106.3.137.51
+//3区
+mysql -unsytdbuser -pnsytdbpassword -h106.3.137.52
+
+
+#查找某个目录文件里是否包含130233的文件名
+grep -l -r '130233' * 
+#查找某个目录文件里是否包含130233的行
+grep -n -r '130233' * 
+
+
+查找目录下的所有文件中是否含有某个字符串 
+find .|xargs grep -ri "IBM" 
+查找目录下的所有文件中是否含有某个字符串,并且只打印出文件名 
+find .|xargs grep -ri "IBM" -l 
+
+find ./ -name "Dance.txt"| xargs grep -n -r  "Motion:"  *
+
+//用sed命令可以批量替换多个文件中的字符串
+sed -i "s/原字符串/新字符串/g" `grep 原字符串 -rl 所在目录`
+
+//将a1.txt中的tab制表符替换为逗号
+sed "s/\t/,/g" a1.txt >a2.txt
+
+pip3 install PyQt5-tools
+pip3 install PyQt5
+pip3 install configparser
+pip3 install SIP
+
+select * from nsytroledb.fixed_charge_reward where account=1277;
+select * from nsytaccountdb.chargelog where account=1277;
+
+//小包unity设置方法
+D:\project_N1\UnityDance_n1\Assets\Scirpt\New_Logic\CommonValueListener.cs
+static bool GetIsNewPackage() return true; 
+
+//客户端宏命令
+D:\project_N1\UnityDance_n1\Assets\Appoitment\Appoitment_MacroCmd.txt
+
+KeyaliasName=lianwu
+KeyaliasPass=lianwu20130624
+KeystorePass=DDLE_LW_20130624
+
+cd /home/build/smartphone/liangliang/
+
+cd /home/build/smartphone/yangt/
+
+umount server
+
+mount -t cifs -o username=Joyce,password=202106 //172.16.2.85/Server_IOS_Pre /opt/yangt/ios_server
+
+netstat -anop tcp | find "3306"
+
+//后台运行脚本
+nohup ./rungate.sh &
+
+//server
+cd makgen
+./makgen
+cd ..
+make clean
+make
+make serveredition
+
+
+//game server
+cd makgen
+./makgen
+cd ..
+make GMServer
+make gmedition
+
+192.168.0.241
+root 123456
+数据库：root 空
+
+61.174.13.249 test4
+root wsj402yk$)@mjh
+数据库：root ddinale202
+
+10.4.18.190 db
+root wsj$)@yk402mjh
+
+172.16.1.25
+root 123456
+共享：root 338955
+
+115.231.94.176 test5
+root wsj402yk$)@mjh
+数据库：root ddinale202
+
+mysql -uroot -pddinale202 -h 127.0.0.1
+
+//远程访问数据库
+mysql -h10.4.18.190 -uroot -pwsj$)@yk402mjh
+
+//ios 审核服数据库
+mysql -uyangtian -pyangtian -h 106.75.45.176
+
+mysql -unsytdbuser -pnsytdbpassword -h 106.75.45.176 -e"select * from nsytaccountdb.chargelog where account=1855" -v > /data/ddianle/chargelog.sql
+
+
+ mysql -unsytdbuser -pnsytdbpassword -h10.10.50.27 -e"select * from nsytroledb.item where roleid = 5388170" -v > /data/ddianle/1.sql
+
+
+谨记：每次发布服务器时必须所有的步骤都按顺序执行一遍
+
+
+scp 0410.tgz root@192.168.0.199:/opt/smartphone/gooddance_server/
+
+D:\project_IOS\UnityDance_P1_IOS_Pre\Assets\Scirpt\New_Logic\Global.cs (907, 21):#if UNITY_IPHONE && VERSION_CHARGE
+
+//配置测试tgz文件
+./stopall.sh
+netstat -aln |grep 7750
+./updateversion.sh adb_xxxx.tgz
+./startall.sh
+./lookstat.sh
+./restartall.sh
+
+//linux共享文件夹
+/etc/samba/smb.conf
+service smb restart
+service smb start
+
+//svn帐号管理
+0.128/usr/local/svn/conf
+
+md5sum 0317.tgz >0317.tgz.md5
+cp /opt/gmserver/archive/gm140324.tgz /opt/publish/Server/appstore
+
+
+adb logcat ActivityManager:I MyApp:D *.W >>d:\111.txt
+
+Assets    svn://192.168.0.128/svndata/branch/SmartPhone_N1/client
+config    svn://192.168.0.128/svndata/branch/SmartPhone_N1/publish/config
+ProjectSettings    svn://192.168.0.128/svndata/branch/SmartPhone_N1/client_setting/ProjectSettings
+res       svn://192.168.0.128/svndata/branch/Resource_N1/Res
+
+
+d:\server_gooddance\datastructure\Macro_Define.h
+enum eQuestState
+{
+	eQuestState_None,	// 无
+	eQuestState_CanAccept,	// 符合任务接受条件,可接但未接
+	eQuestState_HaveRead,	// 查看了任务详情
+	eQuestState_Accepted,	// 已接受任务,进行中，但未完成
+	eQuestState_Completed	// 已完成，可领奖，但未领奖
+	
+};
+
+
+//聊天室命令
+/server/data/commands.lua
+
+wsj402yk$)@mjh
+じose°
+
+
+mysql -uroot -pmeijian8399
+use nsytroledb;
+update nsytroledb.role set priv=0 where roleid=52146255;
+
+update nsytroledb.role set priv=0xffffffff;
+
+//打开nsytaccountdb库
+use nsytaccountdb;
+
+//列出数据库中所有表
+show tables;
+
+//列出所有数据库
+show databases;
+
+//显示数据表的结构
+desc account_gift;
+desc player;
+desc item;//背包
+desc giftcode;
+
+//恢复某个账号的背包物品
+update item set cnt=cnt+1, duration=0, deletetime=0 where roleid=92;
+
+//删除数据库nsytaccountdb
+drop database nsytaccountdb;
+
+//删除表account_gift
+delete from account_gift;
+
+//删除表account_gift中id=1的数据
+delete from account_gift where id=1;
+
+//删除表event中的updatetime列
+alter table event drop updatetime;
+
+//主要注册的账号就增加权限，金券，M币
+alter table nsytroledb.role modify column priv int unsigned not null default 0xffffffff;
+alter table nsytroledb.role modify column money int not null default 50000000;
+alter table nsytaccountdb.bill modify column pt int unsigned not null default 500000;
+
+//重置首充数据
+delete from nsytroledb.event where roleid = 129 and eventid in (8,9);
+
+//统计数据数量
+select count(*) from nsytroledb.dance_group;
+
+//列出表account_gift中所有的数据
+select * from account_gift;
+
+//列出表role中的rolename的数据
+select rolename from role;
+
+//查询表player中account=25的数据
+select * from player where account=25;
+
+//查找item表中数量最多的玩家
+select count(*) c,roleid from item group by roleid order by c desc limit 10;
+
+// 模糊查找
+select * from  role where rolename LIKE "%testy%";
+
+//往account_gift插入数据
+insert into account_gift (pid,puid,gift_id,expired_time) values (1,51,7,unix_timestamp('2014-4-23 18:01:20'));
+
+//修改表player中username=tesy01的密码项
+update player set passwd="aaa" where username="testy01";
+update nsytaccountdb.bill set pt=0 where account=1278
+update nsytaccountdb.bill set bindpt=0 where account=1278
+update nsytroledb.role set money =0 where roleid=131
+
+//account-role表拼接2
+SELECT nsytaccountdb.player.account,nsytaccountdb.player.username,
+nsytroledb.role.roleid,nsytroledb.role.rolename,nsytroledb.role.sex
+from nsytaccountdb.player 
+LEFT JOIN nsytroledb.role 
+on nsytaccountdb.player.account=role.account 
+where username LIKE "testy%"  and pid=1
+
+
+//三表拼接查询
+SELECT nsytaccountdb.player.username, nsytroledb.role.roleid, vipexp_role_20171115.vipexp from nsytaccountdb.player 
+LEFT JOIN nsytroledb.role 
+on nsytaccountdb.player.account=nsytroledb.role.account
+LEFT JOIN nsytroledb.vipexp_role_20171115 
+ON nsytroledb.role.roleid = vipexp_role_20171115.roleid
+WHERE vipexp>0
+
+
+//多表查询
+select * from clothgroup WHERE roleid in 
+(SELECT roleid from role WHERE account in 
+(SELECT account from nsytaccountdb.player WHERE username LIKE "testy0%" ) )
+
+//时间函数
+SELECT * from nsytroledb.mail where receiverid= 2 and sendtime> unix_timestamp('2017-04-04 00:00:00');
+
+select *,from_unixtime(checkintime) from checkin1 where roleid = 1;
+
+//MySQL导入.sql文件
+mysql> source d:/myprogram/database/db.sql;
+
+//导出数据库，进入cmd (注意在os cmd中 而不是在mysql中)
+mysqldump -u root -pmeijian8399 --default-character-set=latin1 --databases nsytaccountdb >/opt/share/yangtian/nsytaccountdb.sql
+
+//一次备份多个数据库
+mysqldump -uroot -p123456 --databases db1 db2>f:\muldbs.sql
+
+//导出nsytroledb数据库的dance_group数据表
+mysqldump -uroot -pddianle202 --default-character-set=latin1 nsytroledb dance_group > tb1.bak;  
+
+//备份多个表的数据和结构（数据，结构的单独备份方法与上同）
+mysqldump -uroot -p123456 mydb t1 t2 > f:\multables.sql
+
+//从meteo数据库的sdata表中导出sensorid=11 且 fieldid=0的数据到 /home/xyx/Temp.sql 这个文件中
+mysqldump -uroot -p123456 meteo sdata --where="sensorid=11 and fieldid=0" > /home/xyx/Temp.sql           
+ 
+//导出查询的数据（-e 执行查询 -v打印出查询语句）
+mysql -uroot -pddianle202 --default-character-set=latin1 -e"select * from nsytroledb.dance_group" -v > a.sql
+
+//导入查询的数据
+mysql -uroot -pddianle202 --default-character-set=latin1 < a.sql
+
+//将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中，db2的数据库必须存在否则会报错
+mysqldump --host=h1 -uroot -proot --databases db1 |mysql --host=h2 -uroot -proot db2
+
+//导出存储过程和自定义函数--routines, -R
+mysqldump  -uroot -p --host=localhost --all-databases --routines
+
+//访问linux数据库权限增加
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456';
+flush privileges ;
+
+//数据库卡脚本
+while true; do echo "select * from nsytroledb.item; " | sql >> null ; done
+while true; do echo "select * from nsytlogdb.log_RoleItem; " | sql >> null ; done
+
+//删除生成的null文件
+while true; do rm -f null; done
+
+查看服务器性能
+top -b > test
+
+//解压tgz
+tar zxvf 0528.tgz
+
+//压缩tgz
+tar zcvf /opt/smartphone/lovedance/adb_1105.tgz *
+
+//解压war
+jar -xvf pushandroid.war
+
+//压缩zip mydata目录压缩为mydata.zip
+zip -r mydata.zip mydata #压缩mydata目录
+
+//解压zip mydata.zip解压到mydatabak目录里面
+unzip mydata.zip
+
+//缓存清除
+cd /usr/local/tomcat/work/Catalina/localhost/pushandroid
+
+//tomcat,照片上传下载
+cd /usr/local/tomcat/bin/startup.sh
+
+//vim /etc/httpd/conf/httpd.conf 
+ps -ef|grep httpd
+
+//开启http服务
+service httpd start
+
+//开启mysql服务
+service mysqld start
+
+//停止mysql服务
+service mysqld stop 
+
+//io状态查询
+iostat -d -k 1  #查看TPS和吞吐量信息
+iostat -d -x -k 1  #查看设备使用率（%util）、响应时间（await）
+iostat -c 1  #查看cpu状态
+
+//安装valgrind
+yum install valgrind

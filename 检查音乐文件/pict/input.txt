@@ -1,0 +1,6 @@
+OS:          	Win2k,WinXP,Win2k3,Vista,Longhorn
+IE:          	IE5, IE6, IE7, Firefox, Safari
+Language: 	Engilish, Japanese, Chinese, German
+CLR: 		Not installed, 1.1, 2.0,3.0,3.5
+MISC: 		V1 Installed, V1 not installed
+

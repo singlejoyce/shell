@@ -1,0 +1,32 @@
+OS	IE	Language	CLR	MISC
+Win2k	Firefox	Engilish	1.1	V1 Installed
+Win2k3	IE5	Japanese	1.1	V1 not installed
+Win2k	IE7	German	Not installed	V1 not installed
+Vista	Safari	Chinese	2.0	V1 Installed
+WinXP	IE6	Chinese	1.1	V1 not installed
+Longhorn	IE7	Engilish	2.0	V1 not installed
+Vista	Firefox	German	3.5	V1 not installed
+Win2k3	IE7	Japanese	3.5	V1 Installed
+Longhorn	IE5	German	3.0	V1 Installed
+WinXP	Safari	Japanese	3.0	V1 not installed
+WinXP	Firefox	Japanese	2.0	V1 Installed
+Vista	IE6	Japanese	Not installed	V1 Installed
+Win2k3	IE6	Engilish	3.0	V1 Installed
+WinXP	Safari	Engilish	Not installed	V1 not installed
+Longhorn	Safari	Chinese	3.5	V1 not installed
+Win2k	Safari	Japanese	3.5	V1 not installed
+Win2k	IE5	Chinese	2.0	V1 Installed
+Longhorn	IE6	German	Not installed	V1 not installed
+Win2k3	Firefox	Chinese	Not installed	V1 Installed
+Vista	IE5	Engilish	Not installed	V1 Installed
+Vista	IE7	German	1.1	V1 Installed
+WinXP	IE5	Engilish	3.5	V1 not installed
+Win2k3	IE6	German	2.0	V1 Installed
+Win2k3	Safari	German	1.1	V1 Installed
+Longhorn	Firefox	Chinese	3.0	V1 Installed
+Win2k	IE7	Chinese	3.0	V1 not installed
+WinXP	IE6	German	3.5	V1 not installed
+WinXP	IE7	Engilish	2.0	V1 Installed
+Longhorn	IE5	Japanese	1.1	V1 Installed
+Win2k	IE6	Engilish	3.5	V1 Installed
+Vista	Safari	Japanese	3.0	V1 not installed

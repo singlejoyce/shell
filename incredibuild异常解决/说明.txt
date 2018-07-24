@@ -1,0 +1,11 @@
+针对incredibuild 在win7上更新补丁后编译报错的问题，解决方案是卸载掉安装的系统补丁（备注：以后大家的测试环境最好不要自动更新系统补丁）
+
+通过powershell-批量卸载补丁操作步骤：
+1、以管理员身份运行powershell
+2、执行：Set-ExecutionPolicy RemoteSigned
+3、输入Y后回车
+4、Remove-Update.ps1脚本拷贝至C盘根目录，然后直接将C盘的该脚本拖入到powershell窗口中执行即可
+
+脚本中：
+$TimeOutDays=7 字段代表卸载多久之前时间安装的补丁
+比如现在本地电脑时间为7月7日，配置为7天，这样就可以卸载7月1日-7月7日之间安装的系统补丁
