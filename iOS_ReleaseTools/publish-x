@@ -1,0 +1,35 @@
+#!/bin/sh
+
+if [ ! -n "$1" ];then
+  echo "Usage:./publish-x project's name"
+  exit 0
+fi
+
+UnityPath=$1
+OutPath=$2 
+i=1
+
+echo "start filtrate $1..."
+rm -rf $OutPath/Res 
+mkdir $OutPath/Res 
+rm -rf $OutPath/Res_All 
+mkdir $OutPath/Res_All 
+rsync -a --exclude ".svn" --exclude ".DS_Store" --exclude "*.sog" --exclude "Animations_Basic" --exclude "*.assetbundle" --exclude "Icon" --exclude "ShaderExtend" --exclude "Materials_window" --exclude "Materials" --exclude "Effect" --exclude "*.xlsx" --exclude "*.ogg" --exclude "mall.sql" $UnityPath/Res $OutPath/
+
+for svnpath in $* 
+do	
+	if(($i==1))
+	then
+		echo "UnityPath"		
+	elif(($i==2))
+	then
+		echo "OutPath"
+	else
+		echo "copying $svnpath..."
+		#cp -r $svnpath $OutPath/Res/
+		rsync -a --exclude ".svn"  --exclude ".DS_Store" $svnpath $OutPath/Res/
+	fi
+	
+	i=`expr $i + 1`
+done
+

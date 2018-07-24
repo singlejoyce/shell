@@ -1,0 +1,17 @@
+#! /bin/sh
+
+ConfigPath=$1
+OutPath=$2
+
+cd $ConfigPath 
+
+rm -r Config.zip 
+
+mkdir Config 
+
+cp -apX PlayerSetting.ini Config
+cp -apX SystemSetting.ini Config
+
+zip -r Config.zip Config 
+
+cp -apX $ConfigPath/Config.zip $OutPath

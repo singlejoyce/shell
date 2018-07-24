@@ -1,0 +1,11 @@
+{
+    "projectsvnpath":"Applications/Unity_appstore_n1",
+    "configsvnpath":"Applications/Unity_appstore_n1/Config",
+    "ressvnpaths":[
+        "/Applications/Resource_IOS_Unity4.7.2/Res/Materials",
+        "/Applications/Resource_IOS_Unity4.7.2/Res/Effect",
+        "/Applications/Resource_IOS_Unity4.7.2/Res/ShaderExtend",
+        "/Applications/Resource_IOS_Unity4.7.2/Res/Icon",
+        "/Applications/Resource_IOS_Unity4.7.2/Res/Animations"
+    ]
+}

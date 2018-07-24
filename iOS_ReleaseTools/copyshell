@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#参数判断
+# if [ $# != 2 ];then
+# 	echo "Params error!"
+# 	echo "Need two params: 1.path of file 2.path of target dir"
+# 	exit
+# # elif [ ! -e $1 ];then
+# # 	echo "The first param is not a file."
+# # 	exit
+#
+# fi
+sleep 10
+#文件路径
+file_path=$1
+
+#保存路径
+dir_path=$2 
+
+time_folder=$3 
+
+if [ -n "$time_folder" ];then 
+	cd $dir_path 
+	mkdir $time_folder 
+	cd .. 
+	dir_path=$dir_path/$time_folder
+fi
+	
+
+#copy
+cp -apX $file_path $dir_path

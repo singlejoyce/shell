@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ ! -n "$1" ];then
+  echo "Usage:./update.sh project's path"
+  exit 0
+fi
+
+for path in $* 
+do
+echo "start update $path"
+svn cleanup $path 
+svn revert $path --depth=infinity -R
+svn up $path --depth=infinity
+done
+echo "update is success"
+
+

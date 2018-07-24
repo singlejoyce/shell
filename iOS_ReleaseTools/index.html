@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>ios自动化发布工具 by demon</title>
+		<style type="text/css" media="screen">
+			body{
+				margin:20px;
+				padding:0;
+			}
+			div{
+				margin:10px;
+			}
+			button{
+				width:100px;
+				height:40px;
+				line-height:40px;
+				cursor:pointer;
+			}
+			.btn1{
+				width:80px;
+				height:30px;
+				line-height:30px;
+				cursor:pointer;
+			}
+			#boxMsg {
+				border:1px solid black;
+				margin:10px auto;
+				padding:5px;
+				width:700px;
+				height:150px;
+				background-color:black;
+				color:white;
+				font-size:11px;
+				font-family:"宋体";
+				-webkit-border-radius:8px;	
+				overflow:auto;		
+			}
+			.header{
+				width:710px;
+				height:60px;
+				line-height:60px;
+				border-bottom:1px solid black;
+				font: bold italic large serif;				
+			}
+			.header h1{
+				margin:0;
+				padding:0;
+				float:left;
+			}
+			.header h1 span{
+				font-size:12px;
+			}
+			.header .right-bar{
+				float:right;
+			}
+			.page {
+				position:absolute;
+				top:0;
+				display:none;
+			}
+			.hidden {
+				display:none;
+			}
+			.active {
+				display:block;
+			}
+			.input_txt {
+				width:450px;
+			}
+			.input_txt2 {
+				width:350px;
+			}
+			#optionconfiglist {
+				width:100px;
+			}
+			.lb1 {
+				display:inline-block;
+				width:150px;
+			}
+			.lb2 {
+				display:inline-block;
+				width:250px;
+			}
+			.content-right {
+				text-align:right;
+			}
+			#configdetailpage input {
+				width:170px;
+			}
+		</style>
+	</head>
+	<body>		
+	<div id="homepage" class="page active">
+		<div class="header">
+			<h1>自动化发布工具  <span> v 1.0 </span></h1>
+			<div class="right-bar">		
+				<button type="button" onclick="gotoPage('respage')">平台资源管理</button>		
+				<button type="button" onclick="gotoPage('configlistpage')">平台配置管理</button>
+			</div>			
+		</div>
+		<div style="clear:both;"></div>	
+		<div>
+			<table style="margin:10px auto;"  border="0" width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						渠道平台						
+					</td>
+					<td>
+						<select name="optionconfiglist" id="optionconfiglist" multiple >
+							<option value="0" selected="selected">所有平台</option>				
+						</select>						
+					</td>
+					<td>
+						已经完成
+					</td>
+					<td>
+						<textarea  id="finishPlatform" rows="5" cols="30"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						编译阶段						
+					</td>
+					<td colspan="2">
+						<label for="buildbigorsmall"><input type="checkbox" id="buildbigorsmall" name="buildbigorsmall">小包编译</label>
+						<label for="buildres"><input type="checkbox" id="buildres" name="buildres">是否编译资源</label>
+            <label for="builddynamic"><input type="checkbox" id="builddynamic" name="builddynamic">编译动态下载基础包</label><br/>
+						<div id="buildItems">
+							<label class="buildui"><input type="checkbox" class="builditem" name="buildui" value="1">ui</label>
+							<label class="buildatlas"><input type="checkbox" class="builditem" name="buildatlas" value="2">atlas</label>
+							<label class="buildstage"><input type="checkbox" class="builditem" name="buildstage" value="3">stage</label>
+							<label class="buildanimation"><input type="checkbox" class="builditem" name="buildanimation" value="4">animation</label>
+							<label class="buildbones"><input type="checkbox" class="builditem" name="buildbones" value="5">bones</label>
+              <label class="buildprefab"><input type="checkbox" class="builditem" name="buildprefab" value="6">GenerateDynamicPrefab</label>
+						</div>
+						<label class="lb2"><input type="radio" name="buildphaseoption" checked="checked" value="1">需要重新编译Unity程序</label><br/>
+						<label class="lb2"><input type="radio" name="buildphaseoption" value="2">需要重新编译XCode并发布</label>						
+					</td>
+				</tr>				
+				<tr>
+					<td colspan="2">
+						<label class="lb1" for="txtPathForIPA">IPA导出路径</label>					
+					</td>
+					<td colspan="2">
+						<input id="txtPathForIPA" class="input_txt" name="txtPathForIPA" type="text"  value="" />
+						<button type="button" class="btn1" onclick="openFolder()" id="btnOpen">open</button>
+					</td>
+				</tr>
+			</table>			
+		</div>	
+		
+		<div class="content-right">			
+			<button type="button" id="btnCreateProject">执行</button>
+		</div>
+		<div id="boxMsg">
+			
+		</div>
+		<div style="position:absolute;top:-100px;left:-500px;">
+			<audio id="music" src="guoge.ogg" controls="controls" ></audio>
+		</div>
+	</div>
+	
+	<div id="configlistpage" class="page">
+			<div class="header">
+				<h1>平台配置管理</h1>
+				<div class="right-bar">
+					<button type="button" onclick="gotoPage('homepage')">返回</button>
+				</div>			
+			</div>
+			<div style="clear:both;"></div>
+			<div class="content-right">
+				<button type="button" id="btnAddPlatform">添加</button>
+			</div>
+			<div>
+				<table id="configlist" style="margin:10px auto;"  border="1" width="100%" cellspacing="0" cellpadding="0">
+				</table>	
+			</div>
+			<div class="content-right">
+				<button type="button" id="btnSaveSelectedConfig">保存选择的平台</button>
+			</div>	
+	</div>
+	
+	<div id="configdetailpage" class="page">
+		<div class="header">
+			<h1>平台配置信息</h1>
+			<div class="right-bar">
+				<button type="button" onclick="gotoPage('configlistpage')">返回</button>
+			</div>			
+		</div>
+		<div style="clear:both;"></div>
+		<div>
+			<table border="0" cellspacing="5" cellpadding="5">
+				<tr>
+					<td>Unity项目路径：</td>
+					<td colspan="3"><input type="text" name="txtPathForUnity" value="" id="txtPathForUnity"></td>									
+				</tr>
+				<tr>
+					<td>平台名称：</td>
+					<td><input type="text" name="configname" value="" id="configname"></td>
+					<td>bundle id：</td>
+					<td><input type="text" name="bundleid" value="" id="bundleid"></td>					
+				</tr>
+				<tr>
+					<td>APK Version：</td>
+					<td><input type="text" name="apkVersion" value="" id="apkVersion"></td>
+					<td>Res Version：</td>
+					<td><input type="text" name="customversion" value="" id="customversion"></td>					
+				</tr>
+				<tr>
+					<td>bundle version：</td>
+					<td><input type="text" name="bundleversion" value="" id="bundleversion"></td>
+					<td>宏名称：</td>
+					<td><input type="text" name="predefine" value="" id="predefine"></td>					
+				</tr>
+				<tr>
+					<td>测试版配置文件：</td>
+					<td><input type="text" name="devProfile" value="" id="devProfile"></td>
+					<td>发布版配置文件：</td>
+					<td><input type="text" name="pubProfile" value="" id="pubProfile"></td>
+				</tr>
+				<tr>
+					<td>企业版配置文件：</td>
+					<td><input type="text" name="inhourseProfile" value="" id="inhourseProfile"></td>
+					<td>测试证书：</td>
+					<td><input type="text" name="debugprofile" value="" id="debugprofile"></td>
+				</tr>
+				<tr>
+					<td>发布证书：</td>
+					<td><input type="text" name="publishprofile" value="" id="publishprofile"></td>
+					<td>企业版证书：</td>
+					<td><input type="text" name="inhourseSign" value="" id="inhourseSign"></td>					
+				</tr>
+				<tr>					
+					<td>生成多个ipa：</td>
+					<td><input type="checkbox" id="buildallipa" name="buildallipa"></td>
+					<td>待替换文件列表：</td>
+					<td>
+						<textarea  id="otherfiles" rows="5" cols="30"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>headersearchpath：</td>
+					<td>
+						<textarea  id="headersearchpaths" rows="5" cols="30"></textarea>
+					</td>
+					<td>linkerflags：</td>
+					<td>
+						<textarea  id="linkerflags" rows="5" cols="30"></textarea>
+					</td>
+				</tr>				
+				<tr>
+					<td>文件列表：</td>
+					<td>
+						<textarea  id="files" rows="5" cols="30"></textarea>
+					</td>
+					<td>文件夹列表：</td>
+					<td>
+						<textarea  id="folders" rows="5" cols="30"></textarea>
+					</td>
+				</tr>								
+				<tr>					
+					<td>libs：</td>
+					<td><textarea  id="libs" rows="5" cols="30"></textarea></td>
+					<td>frameworks:</td>
+					<td><textarea  id="frameworks" rows="5" cols="30"></textarea></td>
+				</tr>				
+			</table>	
+		</div>
+		<div class="content-right">
+			<button type="button" id="btnSaveConfig">保存</button>
+		</div>		
+	</div>
+	<div id="respage" class="page">
+			<div class="header">
+				<h1>平台资源管理</h1>
+				<div class="right-bar">
+					<button type="button" onclick="gotoPage('homepage')">返回</button>
+				</div>	
+				<div style="clear:both;"></div>
+				<div style="margin:20px auto;">
+					<table border="0">
+						<tr>
+							<td>项目svn路径:</td>
+							<td><input type="text" class="input_txt2" name="projectsvnpath" value="" id="projectsvnpath"> </td>
+						</tr>
+						
+						<tr>
+							<td>config svn路径:</td>
+							<td><input type="text" class="input_txt2" name="configsvnpath" value="" id="configsvnpath"> </td>
+						</tr>
+						
+						<tr>
+							<td>资源svn路径:</td>	
+							<td>
+								<textarea class="input_txt2" id="ressvnpaths" rows="5" cols="30"></textarea>
+						    </td>					
+						</tr>
+					</table>
+				</div>	
+				<div class="content-right">
+					<button type="button" id="btnSavePath" onclick="savePaths()">保存</button>
+				</div>
+			</div>		
+			
+	</div>
+		<script src="appconfig.js" type="text/javascript" charset="utf-8"></script>
+		<script src="shell.js" type="text/javascript" charset="utf-8"></script>	
+		<script src="XCodePostProcess.js" type="text/javascript" charset="utf-8"></script>		
+		<script type="text/javascript">
+		var gui=require('nw.gui');
+		win=gui.Window.get();
+		var nativeMenuBar=new gui.Menu({type:"menubar"});
+		try{
+			nativeMenuBar.createMacBuiltin("My App");
+			win.menu=nativeMenuBar;
+		} catch(e) {
+			console.log(ex.message);
+		}
+		
+		var xlsx = require('node-xlsx');
+		var events=require('events');
+		var emitter=new events.EventEmitter();
+		var node_path = require('path');
+		var fs=require('fs');
+		var crypto_node = require('crypto');
+		var platformstate="list";
+		var platform_arr=[];
+		var buildphaseoption="1";
+		var platform_current;
+		var ipaPath;
+		var filesToXcode_arr=[];
+		var otherfiles_arr=[];
+		var ipaType=-1;//o release 1 debug
+		var ipaType_arr=["release","debug"];
+		var time_folder;
+		
+		var buildSmall=false;
+		var buildDynamic=false;
+		
+		var boxMsg=document.getElementById("boxMsg");		
+		var btnCreate=document.getElementById("btnCreateProject");	
+		var btnSaveConfig=document.getElementById("btnSaveConfig");
+		var finishPlatform=document.getElementById("finishPlatform");
+		
+		var projectsetting;
+		
+		function showMsg(msg) {
+			var time=new Date();
+			
+			if(boxMsg.innerText!="") { 
+				boxMsg.innerText=boxMsg.innerText+"\n> "+time+" : "+msg;
+			} else {
+				boxMsg.innerText="> "+time+" : "+msg;
+			}			
+		}	
+		
+		
+		function openFolder() {
+			ipaPath=document.getElementById("txtPathForIPA").value;
+			var exec=require('child_process').exec;
+			exec('open '+"/"+ipaPath,
+		      function(error,stdout,stderr){
+				  if(error !== null) {
+					  alert('exec error: ' + error);
+				  }	      	
+		      });			
+		}
+		
+		//是否编译资源 
+		var checkboxBuildRes=document.getElementById("buildres");
+		var checkBoxes=document.getElementsByClassName("builditem");
+		
+		checkboxBuildRes.addEventListener("click",function(event) {
+			if(checkboxBuildRes.checked) {
+				for(var i=0;i<checkBoxes.length;i++) {
+					checkBoxes[i].checked=true;
+				}
+			} else {
+				for(var i=0;i<checkBoxes.length;i++) {
+					checkBoxes[i].checked=false;
+				}
+			}			
+		});
+		
+		//更新svn
+		function updateProject() {
+			
+			showMsg("svn更新...");
+			var svnpaths=[];
+			svnpaths.push("/"+projectsetting.projectsvnpath+"/ProjectSettings/");			
+			svnpaths.push("/"+projectsetting.projectsvnpath+"/Assets/");
+			//svnpaths.push("/"+projectsetting.projectsvnpath+"/Assets/Scirpt/");
+			svnpaths.push("/"+projectsetting.projectsvnpath+"/Res/");
+			svnpaths=svnpaths.concat(projectsetting.ressvnpaths.slice(0));
+			svnpaths.push("/"+projectsetting.configsvnpath);
+			svnpaths.push("/"+APPPATH+"/data/");
+			
+			execShellSync(BuildArgsConfig.UPDATESHELLPATH,
+				svnpaths,
+				"svn更新完成",
+				showMsg,
+				buildRes
+			);	
+		}
+		
+		//生成资源Res
+		function buildRes() {
+			showMsg("生成资源Res...");
+			var builditems=getBuildItems();
+			var isBasic="0";
+			if(buildSmall){
+				isBasic="1";
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res/Scenes");
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res/UI");
+			} else if(buildDynamic) { //动态下载 
+				isBasic="1";
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res/Scenes");
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res/UI");
+			}
+			execShell(BuildArgsConfig.BUILDRESSHELLPATH,
+				[UINTYPATH,"/"+projectsetting.projectsvnpath,BuildArgsConfig.DATAPATH,builditems,isBasic],
+				"Res生成完成",
+				showMsg,
+				publishRes
+			);
+		}
+		
+		function publishAllRes() {
+			showMsg("发布完整All包资源...");
+			var svnpaths=[];						
+			svnpaths.push("/"+projectsetting.projectsvnpath);
+			svnpaths.push(BuildArgsConfig.DATAPATH);
+			svnpaths=svnpaths.concat(projectsetting.ressvnpaths.slice(0));
+        
+			execShell(BuildArgsConfig.PUBLISHALLSHELLPATH,
+                svnpaths,
+                "发布全包资源完成",
+                showMsg,
+                copyConfig
+			);	
+		}
+    
+		//发布资源
+		function publishRes() {
+			showMsg("开始发布资源...");
+			var svnpaths=[];						
+			svnpaths.push("/"+projectsetting.projectsvnpath);
+			svnpaths.push(BuildArgsConfig.DATAPATH);
+			svnpaths=svnpaths.concat(projectsetting.ressvnpaths.slice(0));
+			
+			if(buildDynamic) {
+                execShell(BuildArgsConfig.PUBLISHDYNAMICSHELLPATH,
+                svnpaths,
+                "发布基础包资源完成",
+                showMsg,
+                publishAllRes
+                );        
+			} else {
+                execShellSync(BuildArgsConfig.PUBLISHSHELLPATH,
+                svnpaths,
+                "发布资源完成",
+                showMsg,
+                copyConfig
+                );        
+			}				
+		}
+    
+    // //遍历读取文件
+    // function readFile(path) {
+    //   files = fs.readdirSync(path);//需要用到同步读取
+    //   files.forEach(walk);
+    //   function walk(file)
+    //   { 
+    //     states = fs.statSync(path+'/'+file);   
+    //     if(states.isDirectory())
+    //     {       
+    //       readFile(path+'/'+file);
+    //     }
+    //     else
+    //     {
+        
+    //     }  
+    //   }
+    // }
+		
+		//获取config并打包zip到指定路径
+		function copyConfig() {	
+      
+			//TODO 小包资源
+			if(buildDynamic) {
+				//动态下载，开始执行生成json文件        		
+				// 先删除文件夹
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res/ServerVer");
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res/ClientVer");      
+				deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/Res_All/ServerVer");
+				
+				// 生成文件夹Res\ServerVer
+				var serverVerPath = BuildArgsConfig.DATAPATH + "/Res/ServerVer";
+				if(!fs.existsSync(serverVerPath)) {
+				  fs.mkdirSync(serverVerPath);
+				}
+
+				serverVerPath = BuildArgsConfig.DATAPATH + "/Res/ClientVer";
+				if(!fs.existsSync(serverVerPath)) {
+				  fs.mkdirSync(serverVerPath);
+				}   
+				
+				serverVerPath = BuildArgsConfig.DATAPATH + "/Res_All/ServerVer";
+				if(!fs.existsSync(serverVerPath)) {
+				  fs.mkdirSync(serverVerPath);
+				}
+							
+				//执行下载基础包资源过滤
+				var p=BuildArgsConfig.DATAPATH+"/Res/Materials";
+				//1 Music
+				fs.mkdirSync(p+"New");
+						
+				//添加默认Skin文件夹
+				fs.mkdirSync(p+"New/"+"Skin");
+				if (fs.existsSync(p+"/Skin/default.skn")) {
+					var skinData=fs.readFileSync(p+"/Skin/default.skn");
+					fs.writeFileSync(p+"New/Skin/default.skn",skinData);
+				} else {
+					alert("缺少default.skn");					
+				}
+						
+				if (fs.existsSync(p+"/Skin/childdefault.skn")) {
+					var skinData=fs.readFileSync(p+"/Skin/childdefault.skn");
+					fs.writeFileSync(p+"New/Skin/childdefault.skn",skinData);
+				} else {
+					alert("缺少childdefault.skn");					
+				}	
+						
+				arr=getXLSXData(6,"/"+projectsetting.projectsvnpath+"/Res/StaticData/物品表.xlsx","服饰",19,14,4);
+				for(var i=0;i<arr.length;i++) {
+					if(fs.existsSync(p+"/"+arr[i]+".clh")) {
+						var data=fs.readFileSync(p+"/"+arr[i]+".clh");
+						fs.writeFileSync(p+"New/"+arr[i]+".clh",data);
+					} else {
+						alert("缺少服饰Atlas文件:"+arr[i]+".clh");
+						//return;
+					}
+				}
+						
+				arr=getXLSXData(7,"/"+projectsetting.projectsvnpath+"/Res/StaticData/物品表.xlsx","旧特效服饰",19,14,4);
+				for(var i=0;i<arr.length;i++) {
+					if(fs.existsSync(p+"/"+arr[i]+".clh")) {
+						var data=fs.readFileSync(p+"/"+arr[i]+".clh");
+						fs.writeFileSync(p+"New/"+arr[i]+".clh",data);
+					} else {
+						alert("缺少旧特效服饰Atlas文件:"+arr[i]+".clh");
+						//return;
+					}
+				}
+							
+				arr=getBabyXLSXData(8,"/"+projectsetting.projectsvnpath+"/Res/StaticData/物品表.xlsx","小孩服饰",19,14,4);
+				for(var i=0;i<arr.length;i++) {
+					if(fs.existsSync(p+"/"+arr[i]+".clh")) {
+						var data=fs.readFileSync(p+"/"+arr[i]+".clh");
+						fs.writeFileSync(p+"New/"+arr[i]+".clh",data);
+					} else {
+						alert("缺少小孩服饰Atlas文件:"+arr[i]+".clh");
+						//return;
+					}
+				}
+						
+				deleteFolderRecursive(p);
+				fs.renameSync(p+"New",p);
+				
+				
+				//全包的ResVer_xxx.json文件生成至Res_All/ServerVer中
+				readFile(BuildArgsConfig.DATAPATH + "/Res_All",'-','',function(filePath,parentFoler) {
+				  fs.appendFileSync(BuildArgsConfig.DATAPATH + "/Res_All" + "/ServerVer" + "/ResVer_" + parentFoler +".json",generateResJsonFile(filePath),'utf8'); 
+				});	 
+				
+				//全包的ResVer_xxx.json文件生成至Res/ServerVer中
+				readFile(BuildArgsConfig.DATAPATH + "/Res_All",'-','',function(filePath,parentFoler) {
+				  fs.appendFileSync(BuildArgsConfig.DATAPATH + "/Res" + "/ServerVer" + "/ResVer_" + parentFoler +".json",generateResJsonFile(filePath),'utf8'); 
+				});	
+				  
+				//下载基础包的ResVer_xxx.json文件生成至Res/ClientVer中
+				readFile(BuildArgsConfig.DATAPATH + "/Res",'-','',function(filePath,parentFolder) {
+				  fs.appendFileSync(BuildArgsConfig.DATAPATH + "/Res" + "/ClientVer" + "/ResVer_" + parentFolder +".json",generateResJsonFile(filePath),'utf8'); 
+				});
+				
+				//全包的ConfigVer.json文件生成至Res/ClientVer中
+				readFile(BuildArgsConfig.DATAPATH + "/Res_All/ServerVer",'-','',function(filePath,parentFolder) {
+				  fs.appendFileSync(BuildArgsConfig.DATAPATH + "/Res" + "/ClientVer" + "/ConfigVer" + ".json",generateResJsonFile(filePath),'utf8'); 
+				});
+				
+				//全包的ConfigVer.json文件生成至Res_All/ServerVer中
+				readFile(BuildArgsConfig.DATAPATH + "/Res_All/ServerVer",'-','',function(filePath,parentFoler) {
+				  fs.appendFileSync(BuildArgsConfig.DATAPATH + "/Res_All" + "/ServerVer" + "/ConfigVer" + ".json",generateResJsonFile(filePath),'utf8'); 
+				 });
+			} 		
+				
+			showMsg("获取config并打包zip到指定路径...");
+			execShellSync(BuildArgsConfig.CONFIGSHELLPATH,
+				["/"+projectsetting.configsvnpath,BuildArgsConfig.DATAPATH],
+				"config.zip就绪",
+				showMsg,
+				execJob
+			);			
+	}   
+    
+    //遍历读取文件
+    function readFile(path,level,parentFolder,callback)
+    {
+      var files = fs.readdirSync(path);//需要用到同步读取
+      files.forEach(walk);
+      function walk(file)
+      {
+        states = fs.statSync(path+'/'+file);   
+        if(states.isDirectory())
+        {   
+          if(level == '-') {
+						if(/ServerVer/.test(file) || /ClientVer/.test(file)) return;
+            // console.log(''+level+file+'\n');
+            parentFolder = file;
+          }	  	       
+          readFile(path+'/'+file,level+'-',parentFolder,callback);
+        }
+        else
+        {
+          if(level == '-') {
+            parentFolder = 'Other';
+          }
+          if(file != '.DS_Store') {
+            callback(path+'/'+file,parentFolder);
+          }		
+        }  
+      }
+    }
+    
+    // 生成文件MD5码 {md5:'xxxxxxx',filename:'xxxxx',size:555555}
+    function generateResJsonFile(fsPath) {
+      var result = {md5:"",filename:"",size:0};
+      var md5 = crypto_node.createHash('md5');
+      var fileBuffer = fs.readFileSync(fsPath);
+      md5.update(fileBuffer);
+      result.md5 = md5.digest('hex');
+      result.size = fileBuffer.length;
+      if(/Animations\/Controller/.test(fsPath)) {	
+        var arr = fsPath.split('/');
+        var n = arr.pop();
+        var folder = arr.pop();
+        result.filename = folder + "_" + n;
+      } else {
+        result.filename = node_path.basename(fsPath);
+      }  
+      var fileState = result.filename + ":" + result.md5 + "|" + result.size + ",";
+      return fileState;
+    }
+		
+		emitter.on("floderrename",function(floder) {
+			
+		});
+		
+		//emitter.emit('floderrename',xx);
+		
+		//copy需要的文件到xcode
+		function copyFilesToXcode() {
+						
+			if(filesToXcode_arr.length>0) {
+				
+				var filesToXcode=filesToXcode_arr.shift();
+                var fPath="";                
+				
+                if(/(Res)/.test(filesToXcode) || /(Config\.zip)/.test(filesToXcode) || /(common)/.test(filesToXcode)) {
+					if (/(Res)/.test(filesToXcode)) {
+						deleteFolderRecursive("/"+projectsetting.projectsvnpath+"/"+platform_current.name+"/Res");
+					}
+                    fPath=BuildArgsConfig.DATAPATH+"/"+filesToXcode.split(":")[0];
+                } else {
+                    fPath=BuildArgsConfig.DATAPATH+"/"+platform_current.name+"/"+filesToXcode.split(":")[0];
+                }
+				                
+				execShell(BuildArgsConfig.COPYSHELLPATH,
+					[fPath,"/"+platform_current.unitypath+"/"+platform_current.name],
+					filesToXcode+"已经copy到xcode工程",
+					showMsg,
+					copyFilesToXcode
+				);				
+			} else {
+                
+                var info_plist_path = "/"+projectsetting.projectsvnpath+"/"+platform_current.name+"/Info.plist";
+                var varsion_plist_path = "/"+projectsetting.projectsvnpath+"/"+platform_current.name+"/interface/Vision.plist";
+                
+                if(fs.existsSync(info_plist_path)) {
+                    var info_plist_str = fs.readFileSync(info_plist_path,'utf8');
+                    info_plist_str = info_plist_str.replace(/{{CustomVersion}}/g,platform_current.apkversion);
+                    info_plist_str = info_plist_str.replace(/{{BundleVersionString}}/g,platform_current.bundleversion);
+                    fs.writeFileSync(info_plist_path,info_plist_str,'utf8');
+                }            
+                
+                if(fs.existsSync(varsion_plist_path)) {
+                    var version_plist_str = fs.readFileSync(varsion_plist_path,'utf8');
+                    version_plist_str = version_plist_str.replace(/{{CustomVersion}}/g,platform_current.apkversion);
+                    version_plist_str = version_plist_str.replace(/{{ResVersion}}/g,platform_current.customversion);
+                    fs.writeFileSync(varsion_plist_path,version_plist_str,'utf8');
+                }
+                
+				updateXcodeSetting();
+			}
+		}        
+		
+		function deleteFolderRecursive(path) {
+		    var files = [];
+		    if( fs.existsSync(path) ) {
+		        files = fs.readdirSync(path);
+		        files.forEach(function(file,index){
+		            var curPath = path + "/" + file;
+		            if(fs.statSync(curPath).isDirectory()) { // recurse
+		                deleteFolderRecursive(curPath);
+		            } else { // delete file
+		                fs.unlinkSync(curPath);
+		            }
+		        });
+		        fs.rmdirSync(path);
+		    }
+		}
+		
+        // arr=getXLSXData(2,"/"+projectsetting.projectsvnpath+"/Res/StaticData/物品表.xlsx","服饰",19,13,4);
+		//获取必须的物品数据 TODO
+		function getXLSXData(xlsxFrom,xlsxPath,sheetName,checkIndex,valueIndex,fitterIndex) {
+			var book=xlsx.parse(xlsxPath);
+			var resultArr=[];			
+			book.forEach(function(sheet) {
+				if(sheet.name==sheetName) {
+					sheet.data.forEach(function(item) {
+						
+						if (typeof(fitterIndex) !="undefined") {
+							//过滤掉肤色类型，肤色类型为15
+							if(item[checkIndex]=="1"&&item[fitterIndex]!="15") {
+								resultArr.push(item[valueIndex]);
+							}
+						} else {
+							if(item[checkIndex]=="1") {
+								resultArr.push(item[valueIndex]);
+							}
+						}
+					},this);
+				}
+			},this);
+			
+			return resultArr;			
+		}
+
+		// arr=getBabyXLSXData(8,"/"+projectsetting.projectsvnpath+"/Res/StaticData/物品表.xlsx","小孩服饰",19,14,4);
+		//获取必须的物品数据 TODO
+		function getBabyXLSXData(xlsxFrom,xlsxPath,sheetName,checkIndex,valueIndex,fitterIndex) {
+			var book=xlsx.parse(xlsxPath);
+			var resultArr=[];			
+			book.forEach(function(sheet) {
+				if(sheet.name==sheetName) {
+					sheet.data.forEach(function(item) {		
+								
+						if (typeof(fitterIndex) !="undefined") {
+							//过滤掉肤色类型，宝宝肤色类型为4
+							if(item[checkIndex]=="1"&&item[fitterIndex]!="4") {
+								resultArr.push(item[valueIndex]);
+							}
+						} else {
+							if(item[checkIndex]=="1") {
+								resultArr.push(item[valueIndex]);
+							}
+						}
+					},this);
+				}
+			},this);
+			
+			return resultArr;			
+		}
+		
+		//修改xcode项目配置
+		function updateXcodeSetting() {	
+					
+			showMsg("修改xcode项目配置...");	
+					
+			var xcodePostProcess = new XCodePostProcess();
+			xcodePostProcess.OnPostProcessBuild(platform_current,
+				platform_current.unitypath+"/"+platform_current.name+"/Unity-iPhone.xcodeproj/",
+				changeFilesToXcode);
+		}
+		
+		//替换需要的文件到xcode
+		function changeFilesToXcode() { 
+			
+			if(otherfiles_arr.length>0) {	
+							
+				var otherfiles=otherfiles_arr.shift();
+				
+				var floderpath="";
+				var arr=otherfiles.split("/");
+				if(arr.length>1) {
+					arr.pop();
+					floderpath=arr.join("/");
+				}
+				
+				execShellSync(BuildArgsConfig.COPYSHELLPATH,
+					[BuildArgsConfig.DATAPATH+"/"+platform_current.name+"/"+otherfiles,"/"+platform_current.unitypath+"/"+platform_current.name+"/"+floderpath],
+					otherfiles+"已经替换到xcode工程",
+					showMsg,
+					changeFilesToXcode	
+				);
+			} else {
+				
+				 var info_plist_path = "/"+projectsetting.projectsvnpath+"/"+platform_current.name+"/Info.plist";
+                var varsion_plist_path = "/"+projectsetting.projectsvnpath+"/"+platform_current.name+"/interface/Vision.plist";
+                
+                if(fs.existsSync(info_plist_path)) {	
+                    var info_plist_str = fs.readFileSync(info_plist_path,'utf8');
+                    info_plist_str = info_plist_str.replace(/{{CustomVersion}}/g,platform_current.apkversion);
+                    info_plist_str = info_plist_str.replace(/{{BundleVersionString}}/g,platform_current.bundleversion);
+                    fs.writeFileSync(info_plist_path,info_plist_str,'utf8');
+                }            
+                
+                if(fs.existsSync(varsion_plist_path)) {
+                    var version_plist_str = fs.readFileSync(varsion_plist_path,'utf8');
+                    version_plist_str = version_plist_str.replace(/{{CustomVersion}}/g,platform_current.apkversion);
+                    version_plist_str = version_plist_str.replace(/{{ResVersion}}/g,platform_current.customversion);
+                    fs.writeFileSync(varsion_plist_path,version_plist_str,'utf8');
+                }
+				
+				showMsg("生成项目配置完成");
+				buildIPA();
+			}
+		}		
+		
+		function outPutIPA() {
+		
+			var callback=execJob;
+			
+			//打包debug release inhourse
+			if(platform_current.buildallipa) {
+				
+				updateXcodeSign();
+			
+				if(ipaType==1) {
+					callback=execJob;
+				} else {
+					callback=buildIPA;				
+				}
+			}
+			
+			if(finishPlatform.value.length==0) {
+				finishPlatform.value=platform_current.name+"_"+ipaType_arr[ipaType];
+			} else {
+				finishPlatform.value=finishPlatform.value+"\n"+platform_current.name+"_"+ipaType_arr[ipaType];
+			}	
+			
+			execShellSync(BuildArgsConfig.COPYSHELLPATH,
+				["/"+platform_current.unitypath+"/"+platform_current.name+'/build/ipa/'+platform_current.name+"_"+ipaType_arr[ipaType]+".ipa","/"+ipaPath,time_folder],
+				"ipa已经copy到指定目录",
+				showMsg,
+				callback
+			);			
+			
+		}
+		
+		//生成ipa文件
+		function buildIPA() {
+			showMsg("开始生成ipa文件...");
+			ipaType=ipaType+1;
+			showMsg("/"+platform_current.unitypath+"/"+platform_current.name);
+									
+			execShellSync(BuildArgsConfig.BUILDIPASHELLPATH,
+				["/"+platform_current.unitypath+"/"+platform_current.name,platform_current.name+"_"+ipaType_arr[ipaType]],
+				"ipa生成成功",
+				showMsg,
+				outPutIPA
+			);
+		}
+		
+		function updateXcodeSign() {
+			
+			var xcodeprojectpath="/"+platform_current.unitypath+"/"+platform_current.name+"/Unity-iPhone.xcodeproj/project.pbxproj";
+			
+			var content=fs.readFileSync(xcodeprojectpath)+"";
+			
+			//release
+			if(ipaType==0) {
+				showMsg("更新签名为debug文件...");
+				content=content.replace(/(iPhone Distribution: Shanghai Lelian Information Technology Co\.\, Ltd \(C259Q68AGC\))/g,"iPhone Developer: shijun wang (3LHUC57LGR)");
+				eval("var reg=/("+platform_current.pubprofile+")/g");
+				content=content.replace(reg,platform_current.devprofile);
+			} else if(ipaType==1) {//debug
+				content=content.replace(/(iPhone Developer: shijun wang \(3LHUC57LGR\))/g,"iPhone Distribution: LoveDance Technology Co., Ltd.");
+				eval("var reg=/("+platform_current.devprofile+")/g");
+				content=content.replace(reg,platform_current.inhourseprofile);
+			} else if(ipaType==2) {//inhourse
+				content=content.replace(/(iPhone Distribution: LoveDance Technology Co\.\, Ltd\.)/g,"iPhone Distribution: diandianle Information Technology Co., Ltd (X4NP9H459A)");
+				eval("var reg=/("+platform_current.devprofile+")/g");
+				content=content.replace(reg,platform_current.pubprofile);
+			}	
+
+			fs.writeFileSync(xcodeprojectpath,content);
+		}
+		
+		var selectedplatform_arr=[];
+		//执行生成xcode项目配置文件
+		btnCreate.addEventListener("click",function(){
+			
+			
+			selectedplatform_arr.length=0;
+			var selected_arr=[];
+			var selected_str="";
+			var optionconfiglist=document.getElementById('optionconfiglist');
+			
+			for(var i=0;i<optionconfiglist.length;i++) {
+				
+				if(optionconfiglist.options[i].selected) {
+					selected_arr.push(optionconfiglist.options[i].value);
+				}				
+			}
+			
+			selected_str=selected_arr.join(",");
+			
+			for(var i=0;i<platform_arr.length;i++) {
+				var reg=new RegExp(platform_arr[i].name);
+				if(reg.test(selected_str)) {
+					selectedplatform_arr.push(platform_arr[i]);
+				}
+			}
+			
+			if(selectedplatform_arr.length==0) {
+				alert("请选择要打包的渠道平台！");
+				return;
+			}
+			
+			if(checkInput()) {
+				
+				finishPlatform.value="";
+				
+				//1：完整编译unity程序
+				//2: 只编译xcode
+				var options=document.getElementsByName("buildphaseoption");
+				for(var i=0;i<options.length;i++) {
+					if(options[i].checked) {
+						buildphaseoption=options[i].value;
+						break;
+					}
+				}
+				
+				getProjectSetting();
+				
+				time_folder=new Date().format("yyyyMMdd-hh-mm-ss");
+				
+				var buildres=document.getElementById("buildres").checked;
+				
+				buildSmall=document.getElementById("buildbigorsmall").checked;
+        
+        // TODO 动态资源包下载
+        buildDynamic=document.getElementById("builddynamic").checked;
+				
+				//需要编译资源
+				if(buildres) {
+					updateProject();
+				} else {
+					//execJob();
+					publishRes();
+				}				
+			}
+					
+		});	
+		
+		function getBuildItems() {
+			var items='';
+			
+			var buildItems=document.getElementsByClassName("builditem");
+			
+			for (var index = 0; index < buildItems.length; index++) {
+				var element = buildItems[index];
+				
+				if(element.checked) {
+					items+=element.value;
+				}
+			}
+			
+			return items;		
+		}
+		
+		function playMusic() {
+			var music=document.getElementById("music");
+			music.play();
+		}
+		
+		function execJob(){
+			
+			if(selectedplatform_arr.length>0) { 
+				
+				ipaType=-1;
+								
+				platform_current=selectedplatform_arr.shift();
+				
+				filesToXcode_arr=platform_current.mods[0].folders.slice(0);				
+				filesToXcode_arr=filesToXcode_arr.concat(platform_current.mods[0].files.slice(0));
+				
+				otherfiles_arr=platform_current.otherfiles.slice(0);
+				
+				boxMsg.innerText="";
+				
+				showMsg("正在执行项目"+platform_current.name+"...");	
+				
+				if(buildphaseoption=="1") {
+					var _premacro='';
+					//TODO201507
+					if (buildSmall) {
+						if (!/PACKAGE_BASIC/.test(platform_current.premacro)) {
+							alert("未定义小包宏！");
+						}
+						_premacro=platform_current.premacro;
+					} else if(buildDynamic) {
+						if (!/PACKAGE_DYNAMICDOWNLOAD/.test(platform_current.premacro)) {
+							alert("未定义动态下载宏！");
+						}
+						_premacro=platform_current.premacro.replace(';PACKAGE_BASIC','').replace('PACKAGE_BASIC','');
+					} else {
+						_premacro=platform_current.premacro.replace(';PACKAGE_BASIC','').replace('PACKAGE_BASIC','')
+						.replace(';PACKAGE_DYNAMICDOWNLOAD','').replace('PACKAGE_DYNAMICDOWNLOAD','');
+					}
+					//生成xcode项目
+					execShellSync(BuildArgsConfig.UNITYBUILDSHELLPATH,
+						["/"+platform_current.unitypath,platform_current.name,_premacro,UINTYPATH],
+						"xcode生成成功",
+						showMsg,
+						copyFilesToXcode
+					);
+					
+				} else {
+					copyFilesToXcode();
+				}				
+				
+			} else {
+				playMusic();
+				return;
+			}
+			
+		}
+		
+		//保存配置文件
+		btnSaveConfig.addEventListener("click",function(){
+			getConfigValue();			
+		});	
+		
+		//添加平台
+		btnAddPlatform.addEventListener("click",function(){
+			addPlatform();
+		});
+		
+		//保存选择的平台
+		btnSaveSelectedConfig.addEventListener("click",function(){
+		    var checkboxs=document.getElementsByName("checkboxplatform");
+			var selectedplatforms_arr=[];
+			for(var i=0;i<checkboxs.length;i++) {
+				if(checkboxs[i].checked) {
+					selectedplatforms_arr.push(checkboxs[i].value);
+				}
+			}
+			var selectedplatforms=selectedplatforms_arr.join(",");
+			for(var i=0;i<platform_arr.length;i++) {
+				var r=new RegExp(platform_arr[i].name);
+				if(r.test(selectedplatforms)) {
+					platform_arr[i].isselected=true;
+				} else {
+					platform_arr[i].isselected=false;
+				}
+			}
+			
+			var filepath=node_path.join(APPPATH,"db/data_platformconfig.js");	
+			
+			var content=JSON.stringify(platform_arr);
+		
+			fs.writeFileSync(filepath,content);
+		
+			alert("保存成功！");			
+		});
+		
+		function gotoPage(pageId,val) {
+			var arr_pages=document.querySelectorAll(".page");
+			for(var i=0;i<arr_pages.length;i++) {
+				var page=arr_pages[i];
+				if(page.id!=pageId) {
+					var cls=page.className;
+					page.className=cls.replace(" active","");
+				}				
+			}
+			
+			var activePage=document.getElementById(pageId);
+			var cls=activePage.className;
+			activePage.className=(cls+" active");
+			
+			if(pageId=="homepage") {
+				getPlatform();
+			} else if(pageId=="configlistpage") {
+				getConfigList();
+			} else if(pageId=="configdetailpage" && typeof(val)!="undefined") {
+				for(var i=0;i<platform_arr.length;i++) {
+					if(platform_arr[i].name==val) {
+						platform_current=platform_arr[i];
+						break;
+					}
+				}
+				
+				//赋值
+				document.getElementById("txtPathForUnity").value=platform_current.unitypath;
+				document.getElementById("configname").value=platform_current.name;
+				document.getElementById("folders").value=platform_current.mods[0].folders.join("\n");
+				document.getElementById("headersearchpaths").value=platform_current.mods[0].headerpaths.join("\n");
+				document.getElementById("linkerflags").value=platform_current.mods[0].linker_flags.join("\n");
+				document.getElementById("bundleid").value=platform_current.bundleid;
+				document.getElementById("files").value=platform_current.mods[0].files.join("\n");
+				document.getElementById("customversion").value=platform_current.customversion;
+				document.getElementById("inhourseProfile").value=platform_current.inhourseprofile;				
+				document.getElementById("inhourseSign").value=platform_current.inhoursesign;
+				document.getElementById("bundleversion").value=platform_current.bundleversion;
+				document.getElementById("apkVersion").value=platform_current.apkversion;
+				document.getElementById("predefine").value=platform_current.premacro;
+				document.getElementById("frameworks").value=platform_current.mods[0].frameworks.join("\n");
+				document.getElementById("debugprofile").value=platform_current.devsign;
+				document.getElementById("publishprofile").value=platform_current.dissign;
+				document.getElementById("libs").value=platform_current.mods[0].libs.join("\n");
+				document.getElementById("otherfiles").value=platform_current.otherfiles.join("\n");
+				document.getElementById("devProfile").value=platform_current.devprofile;
+				document.getElementById("pubProfile").value=platform_current.pubprofile;
+				document.getElementById("buildallipa").checked=platform_current.buildallipa;
+				
+				platformstate="update";
+				
+			} else if(pageId=="respage") {
+				getProjectSetting();
+			}				
+		};
+		
+		function getProjectSetting() {		
+			
+			var filepath=node_path.join(APPPATH,"db/data_projectsetting.js");
+			var content="";
+			content=fs.readFileSync(filepath);
+			projectsetting=JSON.parse(content);
+			
+			document.getElementById("projectsvnpath").value=projectsetting.projectsvnpath;
+			document.getElementById("configsvnpath").value=projectsetting.configsvnpath;
+			document.getElementById("ressvnpaths").value=projectsetting.ressvnpaths.join("\n");
+		}
+		
+		function checkInput() { 
+			
+			ipaPath=document.getElementById("txtPathForIPA").value;
+			
+			if(ipaPath.length>0) {
+				
+			} else {
+				alert("请输入有效的ipa路径！");
+				return false;
+			}
+			
+			return true;			
+		}
+		
+		
+		function getConfigValue()
+		{
+			if(typeof(platform_current)=="undefined")
+			{
+				platform_current=new PlatformConfig();
+			}
+			
+			var unitypath=document.getElementById("txtPathForUnity").value;
+			
+			if(unitypath.length==0) {
+				alert("unity项目路径不能为空！");
+				return;
+			} else if(!fs.existsSync("/"+unitypath)) {
+				alert("unity项目路径不正确！");
+				return;
+			}
+			
+			var configname=document.getElementById("configname").value;
+			var folders=document.getElementById("folders").value;
+			var headersearchpaths=document.getElementById("headersearchpaths").value;
+			var linkerflags=document.getElementById("linkerflags").value;
+			var bundleid=document.getElementById("bundleid").value;
+			var files=document.getElementById("files").value;
+			var customversion=document.getElementById("customversion").value;
+			var inhourseprofile=document.getElementById("inhourseProfile").value;
+			var inhoursesign=document.getElementById("inhourseSign").value;
+			var bundleversion=document.getElementById("bundleversion").value;
+			var apkversion=document.getElementById("apkVersion").value;
+			var predefine=document.getElementById("predefine").value;
+			var frameworks=document.getElementById("frameworks").value;
+			var debugprofile=document.getElementById("debugprofile").value;
+			var publishprofile=document.getElementById("publishprofile").value;
+			var libs=document.getElementById("libs").value;
+			var otherfiles=document.getElementById("otherfiles").value;
+			var devprofile=document.getElementById("devProfile").value;
+			var pubprofile=document.getElementById("pubProfile").value;
+			var buildallipa=document.getElementById("buildallipa").checked;
+			
+			var mod=new Mod();
+			
+			mod.libs=(libs==""?[]:libs.split("\n"));
+			mod.frameworks=(frameworks==""?[]:frameworks.split("\n"));
+			mod.headerpaths=(headersearchpaths==""?[]:headersearchpaths.split("\n"));
+			mod.files=(files==""?[]:files.split("\n"));
+			mod.folders=(folders==""?[]:folders.split("\n"));
+			mod.linker_flags=(linkerflags==""?[]:linkerflags.split("\n"));
+			
+			platform_current.mods=[mod];
+			
+			platform_current.unitypath=unitypath;
+			platform_current.name=configname;			
+			platform_current.apkversion=apkversion;			
+			platform_current.bundleid=bundleid;			
+			platform_current.customversion=customversion;
+			platform_current.inhoursesign=inhoursesign;
+			platform_current.inhourseprofile=inhourseprofile;
+			platform_current.bundleversion=bundleversion;
+			platform_current.premacro=predefine;		
+			
+			platform_current.devsign=debugprofile;
+			platform_current.dissign=publishprofile;
+			platform_current.otherfiles=(otherfiles==""?[]:otherfiles.split("\n"));
+			platform_current.devprofile=devprofile;
+			platform_current.pubprofile=pubprofile;	
+			platform_current.buildallipa=buildallipa;				
+			
+			var arr;
+			var filepath=node_path.join(APPPATH,"db/data_platformconfig.js");
+			
+			var content=fs.readFileSync(filepath);
+			if(typeof(content)=="undefined"||content=="") {
+				arr=[];
+			} else {
+				arr=JSON.parse(content);
+			}
+			
+			if(platformstate=="update") {
+				for(var i=0;i<arr.length;i++) {
+					if(arr[i].name==platform_current.name) {
+						arr[i]=platform_current;
+						break;
+					}
+				}
+				
+			} else if(platformstate=="add") {
+				for(var i=0;i<arr.length;i++) {
+					if(arr[i].name==platform_current.name) {
+						alert("此平台已经存在！");
+						return;
+					}
+				}
+			
+				arr.push(platform_current);				
+			}
+			
+			content=JSON.stringify(arr);
+		
+			fs.writeFileSync(filepath,content);
+		
+			alert("保存成功！");
+			
+			
+			platform_arr=arr;
+			
+			gotoPage("configlistpage");
+			
+		}
+		
+		function addPlatform () {
+			platformstate="add";
+			gotoPage('configdetailpage');
+		}
+		
+		function savePaths() {
+			
+			projectsetting=new ProjectSetting();
+			
+			var projectsvnpath=document.getElementById("projectsvnpath").value;
+			var configsvnpath=document.getElementById("configsvnpath").value;
+			var ressvnpaths=document.getElementById("ressvnpaths").value;
+			
+			projectsetting.projectsvnpath=projectsvnpath;
+			projectsetting.configsvnpath=configsvnpath;
+			projectsetting.ressvnpaths=ressvnpaths.split("\n");
+			
+			var filepath=node_path.join(APPPATH,"db/data_projectsetting.js");
+			var content="";
+			
+			content=JSON.stringify(projectsetting);
+			
+			fs.writeFileSync(filepath,content);
+			
+			alert("保存成功！");
+		}
+		
+		function getPlatform() {
+			var filepath=node_path.join(APPPATH,"db/data_platformconfig.js");
+			var content=fs.readFileSync(filepath);
+			if(typeof(content)=="undefined"||content=="") {
+				arr=[];
+			} else {
+				arr=JSON.parse(content);
+			}
+			platform_arr=arr;
+			
+			var optionconfiglist=document.getElementById("optionconfiglist");
+			var len=optionconfiglist.length;
+			for(var i=1;i<len;i++) {
+				if(optionconfiglist.length>1) {
+					optionconfiglist.options.remove(1);
+				}
+			}			
+			
+			for(var i=0;i<platform_arr.length;i++) {
+				if(platform_arr[i].isselected) {
+					optionconfiglist[optionconfiglist.length]=new Option(platform_arr[i].name,platform_arr[i].name);
+				}
+			}			
+		}
+		
+		function getConfigList() {
+			var configlist=document.getElementById("configlist");
+			var tbHtml='<tr>'+
+						 	'<td>平台选择</td>'+
+							'<td>平台名称</td>'+
+							'<td>操作</td>'+
+						 '</tr>';
+					
+			for(var i=0;i<platform_arr.length;i++) {
+				var checked=platform_arr[i].isselected?"checked":"";
+				var tbContent='<tr>'+
+							 '<td><input type="checkbox" name="checkboxplatform" value="'+platform_arr[i].name+'" '+checked+'></td>'+
+				'<td>'+platform_arr[i].name+'</td>'+
+				"<td><button type=\"button\" onclick=\"gotoPage('configdetailpage','"+platform_arr[i].name+"')\">修改</button></td>"+
+				'</tr>';
+				tbHtml+=tbContent;
+			}
+			
+			configlist.innerHTML=tbHtml;
+		}
+		
+		Date.prototype.format = function(format){ 
+		var o = { 
+		"M+" : this.getMonth()+1, //month 
+		"d+" : this.getDate(), //day 
+		"h+" : this.getHours(), //hour 
+		"m+" : this.getMinutes(), //minute 
+		"s+" : this.getSeconds(), //second 
+		"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+		"S" : this.getMilliseconds() //millisecond 
+		}; 
+		if(/(y+)/.test(format)) { 
+		format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+		} 
+		for(var k in o) { 
+		if(new RegExp("("+ k +")").test(format)) { 
+		format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+		} 
+		} 
+		return format; 
+		};
+		
+		getPlatform();
+		
+		document.getElementById("txtPathForIPA").value=APPPATH.substring(1)+"/ipadir";
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,258 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\AutoBuilder.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AutoBuilder.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About AutoBuilder"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "AutoBuilder Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2013",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_AUTOBUILDER_DIALOG DIALOGEX 0, 0, 651, 314
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "AutoBuilder"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "开始编译",IDOK,262,291,95,16
+    COMBOBOX        IDC_COMBOPARTER,64,67,48,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "选择平台",IDC_STATIC,15,70,33,8
+    LTEXT           "工程路径",IDC_STATIC,15,90,33,8
+    EDITTEXT        IDC_PROJECTPATH,64,86,489,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,64,272,40,14,ES_AUTOHSCROLL
+    LTEXT           "版本号",IDC_STATIC,15,275,25,8
+    CONTROL         "编译UI",IDC_UICOMPILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,390,256,39,10
+    CONTROL         "编译atlas",IDC_atlasCOMPILE2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,438,256,47,10
+    CONTROL         "编译stage",IDC_atlasCOMPILE3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,495,256,50,10
+    LTEXT           "unity路径",IDC_STATIC,15,16,33,8
+    EDITTEXT        IDC_UNITYPATH,64,15,358,12,ES_AUTOHSCROLL
+    LTEXT           "thrid路径",IDC_STATIC,15,144,32,8
+    EDITTEXT        IDC_THRIDPATH,64,141,489,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,64,254,40,14,ES_AUTOHSCROLL
+    LTEXT           "分版本号",IDC_STATIC,15,257,33,8
+    LTEXT           "SVN路径",IDC_STATIC,15,34,30,8
+    EDITTEXT        IDC_SVNPATH,64,32,358,12,ES_AUTOHSCROLL
+    LTEXT           "Res路径",IDC_STATIC,15,160,29,8
+    EDITTEXT        IDC_RESPATH,64,159,489,12,ES_AUTOHSCROLL
+    LTEXT           "资源版本号",IDC_STATIC,123,256,41,8
+    EDITTEXT        IDC_EDIT4,170,254,40,14,ES_AUTOHSCROLL
+    LTEXT           "WinRaR路径",IDC_STATIC,15,52,42,8
+    EDITTEXT        IDC_RARPATH,64,50,358,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5,601,87,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,90,28,8
+    EDITTEXT        IDC_EDIT6,601,142,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,145,28,8
+    EDITTEXT        IDC_EDIT7,601,160,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,162,28,8
+    LTEXT           "config路径",IDC_STATIC,15,124,36,8
+    EDITTEXT        IDC_CONFIGPATH,64,122,489,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,126,28,8
+    EDITTEXT        IDC_EDIT8,601,123,43,12,ES_AUTOHSCROLL
+    LTEXT           "资源包名称",IDC_STATIC,123,276,41,8
+    COMBOBOX        IDC_RESPACKNAME,170,273,122,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "设置路径",IDC_STATIC,15,106,33,8
+    EDITTEXT        IDC_SETTINGPATH,64,103,489,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT9,601,104,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,107,28,8
+    LTEXT           "Materials路径",IDC_STATIC,15,179,46,8
+    EDITTEXT        IDC_MATERIALSPATH,64,176,224,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ITEMLISTPATH,336,176,218,14,ES_AUTOHSCROLL
+    LTEXT           "物品表路径",IDC_STATIC,292,179,41,8
+    CONTROL         "编译小包",IDC_CHECKSMALLPACK,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,373,267,48,10
+    EDITTEXT        IDC_EDIT11,601,177,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,180,28,8
+    LTEXT           "Music路径",IDC_STATIC,15,217,34,8
+    EDITTEXT        IDC_MUSICPATH,64,214,224,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MUSICLISTPATH,336,214,218,14,ES_AUTOHSCROLL
+    LTEXT           "音乐表路径",IDC_STATIC,292,217,41,8
+    EDITTEXT        IDC_EDIT12,601,215,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,218,28,8
+    LTEXT           "Product Name:",IDC_STATIC,127,70,48,8
+    EDITTEXT        IDC_PRODUCTNAME,184,67,140,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MATERIALSDIFFPATH,64,195,224,14,ES_AUTOHSCROLL
+    LTEXT           "Mat差异路径",IDC_STATIC,15,198,45,8
+    CONTROL         "SVN更新",IDC_SVNUP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,495,273,72,10
+    EDITTEXT        IDC_EFFECTPATH,64,233,224,14,ES_AUTOHSCROLL
+    LTEXT           "Effect路径",IDC_STATIC,15,236,36,8
+    EDITTEXT        IDC_EDIT14,601,235,43,12,ES_AUTOHSCROLL
+    LTEXT           "版本号:",IDC_STATIC,567,237,28,8
+    EDITTEXT        IDC_EFFECTLISTPATH,336,233,218,14,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    LTEXT           "特效表路径",IDC_STATIC,292,236,41,8,NOT WS_VISIBLE
+    CONTROL         "Generate Dynamic Prefab",IDC_CHECKGENPREFAB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,391,272,98,10
+    CONTROL         "动态下载基础包",IDC_CHECKDYNDOWNLOAD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,391,289,72,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "AutoBuilder.exe"
+            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
+            VALUE "OriginalFilename", "AutoBuilder.exe"
+            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_AUTOBUILDER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 644
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 307
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ABOUTBOX            "&About AutoBuilder..."
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\AutoBuilder.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

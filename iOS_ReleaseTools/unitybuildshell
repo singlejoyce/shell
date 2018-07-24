@@ -1,0 +1,37 @@
+#!/bin/sh
+
+#参数判断
+#if [ $# != 3 ];then  
+#    echo "需要三个参数。1参数是UNTIY程序的路径 2参数是游戏包的名子 3参数是unity预定义宏"  
+#    exit     
+#fi  
+
+
+
+#游戏程序路径#
+PROJECT_PATH=$1
+
+#生成的Xcode工程路径#
+XCODE_PATH=${PROJECT_PATH}/$2
+
+if [ $# = 3 ];then 
+
+#UNITY程序的路径#
+UNITY_PATH=$3
+
+#将unity导出成xcode工程#
+$UNITY_PATH -batchmode -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForIPhone project-$2-‘’ -quit 
+
+fi 
+
+if [ $# = 4 ];then 
+
+#UNITY程序的路径#
+UNITY_PATH=$4
+
+#将unity导出成xcode工程#
+$UNITY_PATH -batchmode -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForIPhone project-$2-$3 -quit 
+
+fi
+
+echo "XCODE工程生成完毕"
